@@ -4,8 +4,11 @@ from city import City
 from user import User
 
 
-def return_cities_data():
+def initialize_cities_data():
     list_of_cities = []
+    # todo- all of this part of the csv should only be done on the first run.
+    # load will be done every time.
+    # i suggest you put it in a seperate function and call it only once.
     with open("cities.csv", "r") as my_file:
         my_file.readline()
         raw_data = my_file.readlines()
@@ -20,11 +23,12 @@ def return_cities_data():
     with open("cities.pkl", "wb") as cities_file:
         pickle.dump(list_of_cities, cities_file)
 
+def read_cities():
     with open("cities.pkl", "rb") as cities:
         return pickle.load(cities)
 
 
-def return_customers():
+def initialize_users_data():
     list_of_users = []
     with open("updated_users.csv", "r") as users_file:
         users_file.readline()
@@ -33,8 +37,19 @@ def return_customers():
             temp_usr_list = line.split(",")
             user = User(name=temp_usr_list[0], password=temp_usr_list[1])
             list_of_users.append(user)
-    with open("user.pkl", "wb") as users_for_pkl:
+    with open("users.pkl", "wb") as users_for_pkl:
         pickle.dump(list_of_users, users_for_pkl)
 
-    with open("user.pkl", "rb") as users:
+
+def read_users():
+    with open("users.pkl", "rb") as users:
         return pickle.load(users)
+
+
+def initialize_comments_data():
+    with open("comments.pkl", "wb") as comments:
+        return pickle.dump([], comments)
+
+def read_comments():
+    with open("comments.pkl", "rb") as comments:
+        return pickle.load(comments)

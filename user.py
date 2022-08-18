@@ -1,4 +1,4 @@
-from abc import abstractmethod
+import datetime
 
 
 class User:
@@ -7,14 +7,19 @@ class User:
         self.password = password
         self.logged = False
 
-
     def write_comment(self):
+        """
+        This function allows the user to write comments on cities he visited
+        """
         pass
 
     def search_city(self, city_to_search, list_of_cities):
+        """
+        This function allows the user to search for a city in the DB and receive the information about it
+        including comments
+        """
         for city in list_of_cities:
             if city_to_search == city.name:
-                return f" The city is:{city.name}, country is:{city.country},is the city a capital? {city.capital},the population is: {city.population}"
+                return city
 
-        return "no description of the given city"
-
+        return None
